@@ -1,0 +1,9 @@
+﻿minimal generating sets
+linear diophantine equations
+minimal supporting set
+minimal set
+linear constraints
+natural numbers
+strict inequations
+nonstrict inequations
+upper bounds

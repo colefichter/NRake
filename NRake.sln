@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NRakeCore", "NRakeCore\NRakeCore.csproj", "{1D4AF0C3-15F6-48BF-B12D-39C7802172D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NRakeCore.Tests", "NRakeCore.Tests\NRakeCore.Tests.csproj", "{57E08ADE-504F-4C0C-8305-4E1579952762}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D4AF0C3-15F6-48BF-B12D-39C7802172D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D4AF0C3-15F6-48BF-B12D-39C7802172D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D4AF0C3-15F6-48BF-B12D-39C7802172D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D4AF0C3-15F6-48BF-B12D-39C7802172D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57E08ADE-504F-4C0C-8305-4E1579952762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57E08ADE-504F-4C0C-8305-4E1579952762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57E08ADE-504F-4C0C-8305-4E1579952762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57E08ADE-504F-4C0C-8305-4E1579952762}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
