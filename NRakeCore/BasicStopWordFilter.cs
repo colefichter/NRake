@@ -7,6 +7,28 @@ namespace NRakeCore
 {
     public class BasicStopWordFilter : IStopWordFilter
     {
+        public bool IsPunctuation(string word)
+        {
+            bool isPunctuation = false;
+
+            switch (word)
+            {
+                case ".":
+                case ",":
+                case "!":
+                case "?":
+                case ";":
+                case ":":
+                //case"\r":
+                //case "\n":
+                //case "\r\n":
+                    isPunctuation = true;
+                    break;
+            }
+
+            return isPunctuation;
+        }
+
         /// <summary>
         /// Assumes that the input word is already trimmed and lowercased.
         ///   Good: "word", "of", "and", "hello"
@@ -46,6 +68,7 @@ namespace NRakeCore
                 case "both":
                 case "but":
                 case "by":
+                case "can": //Added by CF
                 case "can't":
                 case "cannot":
                 case "could":
@@ -159,6 +182,8 @@ namespace NRakeCore
                 case "under":
                 case "until":
                 case "up":
+                case "use": //Added by CF
+                case "used": //Added by CF
                 case "very":
                 case "was":
                 case "wasn't":

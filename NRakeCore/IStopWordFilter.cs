@@ -8,5 +8,6 @@ namespace NRakeCore
     public interface IStopWordFilter
     {
         bool IsStopWord(string word);
+        bool IsPunctuation(string word);
     }
 }
