@@ -43,7 +43,7 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void Tokenize1()
+        public void Tokenize()
         {
             //Arrange
             KeywordExtractor extractor = new KeywordExtractor();
@@ -105,15 +105,31 @@ namespace UnitTestProject1
             KeywordExtractor extractor = new KeywordExtractor();
             HtmlDocument doc = new HtmlDocument();
             doc.Load("LargeFile.html");
-            var body = doc.DocumentNode.SelectSingleNode("//body");
+            var body = doc.DocumentNode.SelectSingleNode("descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' content ')]");
             RemoveComments(body);
             string text = body.InnerText;
 
             //Act
             var res = extractor.FindKeyPhrases(text);
 
-            //Assert
-            
+            //Assert            
+        }
+
+        [TestMethod]
+        public void FindKeyPhrases_LargeHtmlFile2()
+        {
+            //Arrange
+            KeywordExtractor extractor = new KeywordExtractor();
+            HtmlDocument doc = new HtmlDocument();
+            doc.Load("LargeFile2.html");
+            var body = doc.DocumentNode.SelectSingleNode("descendant-or-self::*[contains(concat(' ', normalize-space(@class), ' '), ' posts ')]");
+            RemoveComments(body);
+            string text = body.InnerText;
+
+            //Act
+            var res = extractor.FindKeyPhrases(text);
+
+            //Assert            
         }
 
         public static void RemoveComments(HtmlNode node)

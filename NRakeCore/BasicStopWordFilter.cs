@@ -13,12 +13,30 @@ namespace NRakeCore
 
             switch (word)
             {
-                case ".":
-                case ",":
-                case "!":
-                case "?":
-                case ";":
-                case ":":
+                case @".":
+                case @",":
+                case @"!":
+                case @"?":
+                case @";":
+                case @":":
+                case @"(":
+                case @")":
+                case @"[":
+                case @"]":
+                case @"{":
+                case @"}":
+                case @"|":
+                case @"/":
+                case @"\":  
+                case @"#":
+                case @"%":
+                case @"^":
+                case @"&":
+                case @"*":
+                case @"-":
+                case @"_":
+                case @"+":
+                case @"=":
                 //case"\r":
                 //case "\n":
                 //case "\r\n":
@@ -38,6 +56,8 @@ namespace NRakeCore
         /// <returns></returns>
         public bool IsStopWord(string word)
         {
+            if (word.Length < 3) { return true; }
+
             bool isStopWord = false;
 
             //Would it be faster to do a binary search here? I think flow control through a switch is O(1), whereas a binary search is O(log n).
@@ -83,6 +103,7 @@ namespace NRakeCore
                 case "down":
                 case "during":
                 case "each":
+                case "etc": //Added by CF
                 case "few":
                 case "for":
                 case "from":

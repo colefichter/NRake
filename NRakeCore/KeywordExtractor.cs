@@ -10,7 +10,7 @@ namespace NRakeCore
     {
         IStopWordFilter _stopWords;
         //Regex _reSplit = new Regex(@"[a-zA-Z']+");
-        Regex _reSplit = new Regex(@"\s|([,.;:!?])"); //This split captures punctuation, but discards spaces.
+        Regex _reSplit = new Regex(@"\s|([_,.;:!?\(\)\[\]\{\}\/\|\\\*\#\%\^\&\-\=\+])"); //This split captures punctuation, but discards spaces.
 
         SortedSet<string> _uniqueWords = null;
 
