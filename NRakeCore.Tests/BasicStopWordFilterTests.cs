@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using NRakeCore;
+using NRakeCore.StopWordFilters;
 
 namespace UnitTestProject1
 {

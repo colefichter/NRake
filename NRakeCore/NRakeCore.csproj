@@ -39,9 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicStopWordFilter.cs" />
+    <Compile Include="StopWordFilters\BasicStopWordFilter.cs" />
     <Compile Include="DistinctItemComparer.cs" />
-    <Compile Include="IStopWordFilter.cs" />
+    <Compile Include="StopWordFilters\EnglishSmartStopWordFilter.cs" />
+    <Compile Include="StopWordFilters\IStopWordFilter.cs" />
     <Compile Include="KeywordExtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SparseMatrix.cs" />

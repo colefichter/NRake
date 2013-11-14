@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
+using NRakeCore.StopWordFilters;
+
 namespace NRakeCore
 {
     public class KeywordExtractor
