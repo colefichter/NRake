@@ -42,6 +42,7 @@
     <Compile Include="StopWordFilters\BasicStopWordFilter.cs" />
     <Compile Include="DistinctItemComparer.cs" />
     <Compile Include="StopWordFilters\EnglishSmartStopWordFilter.cs" />
+    <Compile Include="StopWordFilters\FrenchStopWordFilter.cs" />
     <Compile Include="StopWordFilters\IStopWordFilter.cs" />
     <Compile Include="KeywordExtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

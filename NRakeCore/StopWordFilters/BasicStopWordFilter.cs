@@ -5,6 +5,9 @@ using System.Text;
 
 namespace NRakeCore.StopWordFilters
 {
+    /// <summary>
+    /// A simple English stop-word filter.
+    /// </summary>
     public class BasicStopWordFilter : IStopWordFilter
     {
         public virtual bool IsPunctuation(string word)
