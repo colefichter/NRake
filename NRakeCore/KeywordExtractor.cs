@@ -24,6 +24,14 @@ namespace NRakeCore
             }
         }
 
+        public IStopWordFilter StopWordFilter
+        {
+            get
+            {
+                return this._stopWords;
+            }
+        }
+
         public KeywordExtractor()
         {
             _stopWords = new BasicStopWordFilter();
@@ -32,6 +40,47 @@ namespace NRakeCore
         public KeywordExtractor(IStopWordFilter filter)
         {
             _stopWords = filter;
+        }
+
+        /// <summary>
+        /// Returns a KeywordExtractor intialized with the best stop-word filter for a given language/culture string.
+        /// The default filter is EnglishSmartStopWordFilter.
+        /// </summary>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public static KeywordExtractor GetBestInstanceForCulture(string culture)
+        {
+            IStopWordFilter filter = new EnglishSmartStopWordFilter();
+            if (!string.IsNullOrEmpty(culture))
+            {
+                culture = culture.Trim().ToLower();
+                if (culture.Length > 2)
+                {
+                    culture = culture.Substring(0, 2);
+                }
+
+                if (culture.Length == 2)
+                {
+                    switch (culture)
+                    {
+                        case "en":
+                            break; //intentionally doing nothing
+
+                        case "fr":
+                            filter = new FrenchStopWordFilter();
+                            break;
+
+                        default:
+                            break; //intentionally doing nothing
+                    }
+                }
+                else
+                {
+                    //Not a valid culture/language code... ignore.
+                }
+            }
+
+            return new KeywordExtractor(filter);
         }
 
         public string[] FindKeyPhrases(string inputText)

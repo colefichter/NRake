@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HtmlAgilityPack;
 
 using NRakeCore;
+using NRakeCore.StopWordFilters;
 
 namespace UnitTestProject1
 {
@@ -26,6 +27,114 @@ namespace UnitTestProject1
                 return File.ReadAllLines("Sample1_ExpectedOutput.txt").Select(x => x.Trim()).ToArray();
             }
         }
+
+        #region GetBestInstanceForCulture (Note, some of the tests incorporate mixed case, rather than having a specific test for that...)
+
+        [TestMethod]
+        public void GetBestInstanceForCulture_Empty()
+        {
+            //Arrange
+            string lang = string.Empty;
+
+            //Act
+            var extractor = KeywordExtractor.GetBestInstanceForCulture(lang);
+
+            //Assert
+            Assert.AreEqual(typeof(EnglishSmartStopWordFilter), extractor.StopWordFilter.GetType());
+        }
+
+        [TestMethod]
+        public void GetBestInstanceForCulture_Invalid()
+        {
+            //Arrange
+            string lang = "not a real culter, yo!";
+
+            //Act
+            var extractor = KeywordExtractor.GetBestInstanceForCulture(lang);
+
+            //Assert
+            Assert.AreEqual(typeof(EnglishSmartStopWordFilter), extractor.StopWordFilter.GetType());
+        }
+
+        [TestMethod]
+        public void GetBestInstanceForCulture_EN()
+        {
+            //Arrange
+            string lang = @"EN";
+
+            //Act
+            var extractor = KeywordExtractor.GetBestInstanceForCulture(lang);
+
+            //Assert
+            Assert.AreEqual(typeof(EnglishSmartStopWordFilter), extractor.StopWordFilter.GetType());
+        }
+
+        [TestMethod]
+        public void GetBestInstanceForCulture_ENCA()
+        {
+            //Arrange
+            string lang = "en-CA";
+
+            //Act
+            var extractor = KeywordExtractor.GetBestInstanceForCulture(lang);
+
+            //Assert
+            Assert.AreEqual(typeof(EnglishSmartStopWordFilter), extractor.StopWordFilter.GetType());
+        }
+
+        [TestMethod]
+        public void GetBestInstanceForCulture_ENUS()
+        {
+            //Arrange
+            string lang = "en-us";
+
+            //Act
+            var extractor = KeywordExtractor.GetBestInstanceForCulture(lang);
+
+            //Assert
+            Assert.AreEqual(typeof(EnglishSmartStopWordFilter), extractor.StopWordFilter.GetType());
+        }
+
+        [TestMethod]
+        public void GetBestInstanceForCulture_ENGB()
+        {
+            //Arrange
+            string lang = "en-gb";
+
+            //Act
+            var extractor = KeywordExtractor.GetBestInstanceForCulture(lang);
+
+            //Assert
+            Assert.AreEqual(typeof(EnglishSmartStopWordFilter), extractor.StopWordFilter.GetType());
+        }
+
+        [TestMethod]
+        public void GetBestInstanceForCulture_FR()
+        {
+            //Arrange
+            string lang = "fr";
+
+            //Act
+            var extractor = KeywordExtractor.GetBestInstanceForCulture(lang);
+
+            //Assert
+            Assert.AreEqual(typeof(FrenchStopWordFilter), extractor.StopWordFilter.GetType());
+        }
+
+        [TestMethod]
+        public void GetBestInstanceForCulture_FRCA()
+        {
+            //Arrange
+            string lang = "fr-ca";
+
+            //Act
+            var extractor = KeywordExtractor.GetBestInstanceForCulture(lang);
+
+            //Assert
+            Assert.AreEqual(typeof(FrenchStopWordFilter), extractor.StopWordFilter.GetType());
+        }
+
+        #endregion
 
         [TestMethod]
         public void FindKeyPhrases()
