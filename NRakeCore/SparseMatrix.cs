@@ -20,12 +20,6 @@ namespace NRakeCore
             this.Size = w * h;
         }
 
-        public bool IsCellEmpty(int row, int col)
-        {
-            long index = row * Width + col;
-            return _cells.ContainsKey(index);
-        }
-
         public T this[int row, int col]
         {
             get

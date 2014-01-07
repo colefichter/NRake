@@ -58,6 +58,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BasicStopWordFilterTests.cs" />
+    <Compile Include="SparseMatrixTests.cs" />
     <Compile Include="WordCooccurrenceMatrixTests.cs" />
     <Compile Include="KeywordExtractorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
