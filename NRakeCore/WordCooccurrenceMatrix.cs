@@ -7,7 +7,8 @@ namespace NRakeCore
 {
     public sealed class WordCooccurrenceMatrix
     {
-        private SparseMatrix<int> _matrix;
+        //private SparseMatrix<int> _matrix;
+        private RowOrientedSparseMatrix<int> _matrix;
         private int _n = 0;
         private string[] _lookupTable = null;
 
@@ -30,7 +31,8 @@ namespace NRakeCore
             _lookupTable = words.ToArray();
             //Create a square (n x n) matrix with the same rows and columns.
             _n = _lookupTable.Length;
-            _matrix = new SparseMatrix<int>(_n, _n);
+            //_matrix = new SparseMatrix<int>(_n, _n);
+            _matrix = new RowOrientedSparseMatrix<int>(_n, _n);
         }
 
         public int IndexOf(string word)
@@ -69,20 +71,37 @@ namespace NRakeCore
         {
             SortedList<string, WordScore> leagueTable = new SortedList<string, WordScore>();
 
+            //foreach (string s in _lookupTable)
+            //{
+            //    int degree = 0;
+            //    int frequency = 0;
+            //    int rowIndex = IndexOf(s);
+            //    for (int c = 0; c < _n; c++) //Examine every column in the row
+            //    {
+            //        int entry = _matrix[rowIndex, c];
+            //        if (entry != default(int) && entry > 0)
+            //        {
+            //            frequency += 1;
+            //            degree += entry;
+            //        }
+            //    }
+            //    leagueTable.Add(s, new WordScore(degree, frequency));
+            //}
             foreach (string s in _lookupTable)
             {
                 int degree = 0;
                 int frequency = 0;
                 int rowIndex = IndexOf(s);
-                for (int c = 0; c < _n; c++) //Examine every column in the row
+
+                int[] entries = _matrix.Row(rowIndex);
+                foreach (int entry in entries)
                 {
-                    int entry = _matrix[rowIndex, c];
                     if (entry != default(int) && entry > 0)
                     {
                         frequency += 1;
                         degree += entry;
                     }
-                }
+                }               
                 leagueTable.Add(s, new WordScore(degree, frequency));
             }
 
@@ -96,16 +115,20 @@ namespace NRakeCore
             {
                 string[] words = phrase.Split(' ');
                 double ratio = 0;
-                //int degree = 0;
-                //int frequency = 0;
                 foreach (string word in words)
                 {
-                    //degree += leagueTable[word].Degree;
-                    //frequency += leagueTable[word].Frequency;
                     ratio += leagueTable[word].Ratio;
                 }
-                //agg.Add(phrase, new WordScore(degree, frequency));
-                agg.Add(phrase, ratio);
+                try
+                {
+                    agg.Add(phrase, ratio);
+                }
+                catch (ArgumentException)
+                {
+                    //You would think that the .Distinct() call would prevent duplicate keys in the dict, but the strangest bug I've ever seen
+                    //occurs when we extract the text from http://federalreserve.gov/pubs/lockins/default.htm and run it through here.
+                    //See KeywordExtractorTests.FindKeyPhrases_DuplicateKeyException().
+                }
             }
 
             return agg;

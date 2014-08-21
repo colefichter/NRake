@@ -13,6 +13,15 @@ namespace UnitTestProject1
     [TestClass]
     public class KeywordExtractorTests
     {
+        protected string LockInsText
+        {
+            get
+            {
+                //This is the boilerpipe extracted content from http://federalreserve.gov/pubs/lockins/default.htm
+                return File.ReadAllText("lock-ins.txt");
+            }
+        }
+
         protected string Sample1
         {
             get
@@ -149,6 +158,25 @@ namespace UnitTestProject1
             //Assert
             Assert.AreEqual(11, res.Length);
             Assert.AreEqual("minimal supporting set", res[0]);
+        }
+
+        [TestMethod]
+        public void FindKeyPhrases_DuplicateKeyException()
+        {
+            //Arrange
+            KeywordExtractor extractor = new KeywordExtractor();
+            
+            //Act
+            var res = extractor.FindKeyPhrases(this.LockInsText);
+
+            //CF Aug 21, 2014: The LockInsText file is weird! The first instance of the word "application" has some wonky encoding that actually
+            // ends up as "appli-cation", but it's not displayed consistently in all views.  In WordCooccurrenceMatrix.AggregateLeagueTable()
+            // we end up with both variants being put in the array created by .Distinct() but on insertion into the dict, they are treated as
+            // an identical key! WTF!
+            // This used to throw an unhandled exception (see http://github.dev/yellowpencil/Octave/issues/383) but we've added a try/catch that
+            // swallows the exception because it should only occur in really bizarre cases like this one. (Shouldn't be a perf issue either).
+            
+            //Assert
         }
 
         [TestMethod]
