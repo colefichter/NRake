@@ -119,8 +119,16 @@ namespace NRakeCore
                 {
                     ratio += leagueTable[word].Ratio;
                 }
-                //agg.Add(phrase, new WordScore(degree, frequency));
-                agg.Add(phrase, ratio);
+                try
+                {
+                    agg.Add(phrase, ratio);
+                }
+                catch (ArgumentException)
+                {
+                    //You would think that the .Distinct() call would prevent duplicate keys in the dict, but the strangest bug I've ever seen
+                    //occurs when we extract the text from http://federalreserve.gov/pubs/lockins/default.htm and run it through here.
+                    //See KeywordExtractorTests.FindKeyPhrases_DuplicateKeyException().
+                }
             }
 
             return agg;
